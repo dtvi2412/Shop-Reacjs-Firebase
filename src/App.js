@@ -1,24 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+
+import "./App.css";
+import Nav from "./Components/Nav/Nav";
+import Products from "./Components/Product/Products";
+import TextBackground from "./Components/TextBackground/TextBackground";
 
 function App() {
+  useEffect(() => {
+    // Custom Poiter
+    let cursor = document.querySelector(".poiter");
+    window.addEventListener("mousemove", (e) => {
+      cursor.setAttribute(
+        "style",
+        "top:" + (e.pageY - 10) + "px;left:" + (e.pageX - 10) + "px"
+      );
+    });
+    document.addEventListener("click", () => {
+      cursor.classList.add("expand");
+      setTimeout(() => {
+        cursor.classList.remove("expand");
+      }, 500);
+    });
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="poiter"></div>
+      <div className="bgApp"></div>
+      {/* Navbar  */}
+      <Nav />
+      {/* Carousel text */}
+      <TextBackground />
+
+      {/* Product */}
+      <Products />
     </div>
   );
 }

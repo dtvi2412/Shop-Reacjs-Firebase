@@ -1,0 +1,73 @@
+.textBg {
+    width: 100%;
+    &__content {
+        width: 600px;
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        transform: translateY(-50%);
+        overflow: hidden;
+        &__left {
+            display: inline-flex;
+            transform: translateX(0);
+            transition: transform 0.5s;
+            &__item {
+                width: 600px;
+            }
+            .title {
+                color: #fff;
+                font-size: 3.5rem;
+                font-weight: bold;
+            }
+            .descrition {
+                font-size: 1.2rem;
+                font-weight: 300;
+                color: #fff;
+                margin: 20px 0;
+            }
+            .btnLearn {
+                padding: 15px 20px;
+                background-color: #fff;
+                color: #111;
+                font-size: 1.1rem;
+                border: none;
+                border-radius: 12px;
+                &:hover {
+                    cursor: pointer;
+                }
+                &:focus {
+                    outline: none;
+                    border: none;
+                }
+            }
+        }
+    }
+    .controller {
+        width: 1px;
+        height: 320px;
+        background-color: #fff;
+        position: absolute;
+        top: 25%;
+        right: 70px;
+        transform: translateY(10%);
+        #line1,
+        #line2,
+        #line3,
+        #line4 {
+            height: 80px;
+            width: 10px;
+            cursor: pointer;
+            transform: translateX(-50%);
+        }
+        #active {
+            height: 80px;
+            width: 5px;
+            border-radius: 10px;
+            background: #fff;
+            position: absolute;
+            top: 0;
+            transform: translateX(-50%);
+            transition: top 0.5s;
+        }
+    }
+}

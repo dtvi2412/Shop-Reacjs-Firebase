@@ -1,38 +1,77 @@
-.App {
-  text-align: center;
+:root {
+  --bgImag: url("https://images.unsplash.com/photo-1522284884944-703a6d2122a6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
 }
+.App {
+  /* position: relative; */
+}
+.bgApp {
+  /* background-image: url("https://images.unsplash.com/photo-1521017432531-fbd92d768814?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"); */
+  /* background-image: url("https://images.unsplash.com/photo-1544716668-3d9044c0f2e4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"); */
+  background-image: var(--bgImag);
+  background-size: cover;
+  background-position: center;
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.poiter {
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 100000;
 
-.App-logo {
-  height: 40vmin;
+  animation: cursorAni 0.5s infinite alternate;
   pointer-events: none;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.poiter::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border: 8px solid gray;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0.5;
+  top: -8px;
+  left: -8px;
+  animation: cursorAni2 0.5s infinite alternate;
+}
+.expand {
+  animation: cursorAni3 0.5s forwards;
+  border: 1px solid red;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
+@keyframes cursorAni {
   from {
-    transform: rotate(0deg);
+    transform: scale(1);
   }
   to {
-    transform: rotate(360deg);
+    transform: scale(0.7);
+  }
+}
+@keyframes cursorAni2 {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.5);
+  }
+}
+@keyframes cursorAni3 {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(3);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
   }
 }
