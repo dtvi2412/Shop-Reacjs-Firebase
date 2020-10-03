@@ -1,1 +1,11 @@
 export const PRODUCTS = "PRODUCTS";
+
+export const QUICK_VIEW = "QUICK_VIEW";
+export const OPEN_POPUP_QUICK_VIEW = "OPEN_POPUP_QUICK_VIEW";
+export const CLOSE_POPUP_QUICK_VIEW = "CLOSE_POPUP_QUICK_VIEW";
+
+export const OPEN__POPUP_CART = "OPEN__POPUP_CART";
+export const CLOSE__POPUP_CART = "CLOSE__POPUP_CART";
+
+export const ADD_BASKET = "ADD_BASKET";
+export const DELETE_ITEM_CART = "DELETE_ITEM_CART";

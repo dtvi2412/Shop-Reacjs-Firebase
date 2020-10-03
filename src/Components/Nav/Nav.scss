@@ -1,7 +1,4 @@
 .nav {
-  // padding: 10px 0;
-  // background-color: rgba(169, 227, 255, 0.7);
-
   position: relative;
   z-index: 99999;
 
@@ -24,10 +21,14 @@
     top: 0;
     left: 0;
     right: 0;
-    // margin: 0 50px;
+
     padding: 10px 50px;
     &__logo {
       .brand {
+        a {
+          text-decoration: none;
+          color: #840d0d;
+        }
         font-weight: bold;
         font-size: 2.3rem;
         &:hover {
@@ -36,6 +37,10 @@
         }
       }
       .text {
+        a {
+          text-decoration: none;
+          color: black;
+        }
         font-size: 1.1rem;
         font-weight: 700;
         &:hover {

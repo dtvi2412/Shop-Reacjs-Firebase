@@ -1,0 +1,126 @@
+.quickView {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: 100000;
+  background-color: rgba(0, 0, 0, 0.6);
+  &__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 50px;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background-color: #99c2e2;
+      animation: linePop 0.3s linear 0s 1 alternate;
+    }
+    &__close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    &__items {
+      display: flex;
+      //   align-items: flex-start;
+      &__left {
+        margin-right: 50px;
+        & > img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+      &__right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-left: 10px;
+        &__name {
+          font-size: 1.4rem;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+        &__price {
+          font-size: 1rem;
+          font-weight: 500;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+          opacity: 0;
+        }
+        input[type="number"]::-webkit-inner-spin-button:hover {
+          opacity: 1;
+        }
+        input[type="number"]::-webkit-outer-spin-button:hover {
+          opacity: 1;
+        }
+
+        .number {
+          width: 40%;
+          padding: 5px 8px;
+          margin: 10px 0;
+          border: 1px solid black;
+        }
+        &__quantity {
+          display: flex;
+          flex-direction: column;
+        }
+        &__add {
+          width: 100%;
+          border: none;
+          background: rgba(0, 0, 0, 1);
+          color: #fff;
+          font-size: 1rem;
+          padding: 10px 5px;
+
+          transition: all 300ms;
+          &:focus {
+            outline: none;
+            border: none;
+          }
+          &:hover {
+            background: rgba(0, 0, 0, 0.6);
+          }
+        }
+      }
+    }
+  }
+}
+@keyframes linePop {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 1099px) {
+  .quickView {
+    &__content {
+      &__items {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &__right {
+          .number {
+            width: 80%;
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,10 +4,14 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { PRODUCTS } from "../../Redux/Types/type";
 import ProductItem from "../ProductItem/ProductItem";
 import "./Products.scss";
+import QuickView from "../Popup/QuickView/QuickView";
+
 const Products = () => {
   const dispatch = useDispatch();
-  const products = useSelector((product) => product.coursesReducer.products);
-
+  const products = useSelector((products) => products.coursesReducer.products);
+  const quickViewProduct = useSelector(
+    (product) => product.coursesReducer.setPopupQuickView
+  );
   useEffect(() => {
     //Get data
     let databaseInfb = dataFirebase.database().ref("databag/");
@@ -41,12 +45,21 @@ const Products = () => {
       return <ProductItem key={item.id} item={item} />;
     });
   };
+  const loadQuickViewProduct = () => {
+    if (quickViewProduct) {
+      return <QuickView />;
+    }
+  };
   return (
-    <div className="products">
-      <div className="products__content">
-        <div className="products__content__items">{handleLoadProduct()}</div>
+    <>
+      <div className="products">
+        {loadQuickViewProduct()}
+
+        <div className="products__content">
+          <div className="products__content__items">{handleLoadProduct()}</div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

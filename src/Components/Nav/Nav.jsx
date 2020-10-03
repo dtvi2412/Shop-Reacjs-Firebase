@@ -3,12 +3,16 @@ import PersonIcon from "@material-ui/icons/Person";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import { connect, useDispatch, useSelector } from "react-redux";
 
 import "./Nav.scss";
-
+import { OPEN__POPUP_CART } from "../../Redux/Types/type";
+import { Link } from "react-router-dom";
 const Nav = () => {
   const [nav, setNav] = useState(true);
   const [bgNav, setBgNav] = useState(false);
+  const dispatch = useDispatch();
+  const basket = useSelector((item) => item.coursesReducer.basket);
   useEffect(() => {
     //Active Nav
     let openNav = document.querySelector(".openNav");
@@ -30,24 +34,45 @@ const Nav = () => {
   useEffect(() => {
     //Custom ScrollY
     const handleScrool = () => {
+      let dtv = document.getElementById("dtv");
+      let devshop = document.getElementById("dtvshop");
       if (window.scrollY > 100) {
         setBgNav(true);
         setNav(true);
+        dtv.setAttribute("style", "color:black");
+        devshop.setAttribute("style", "color:black");
       } else {
         setBgNav(false);
+        dtv.setAttribute("style", "color:#840d0d");
+        devshop.setAttribute("style", "color:#111");
       }
     };
     window.addEventListener("scroll", handleScrool);
     return () => window.removeEventListener("scroll", handleScrool);
   }, []);
+  // Handle Open popup Cart
+  const openPopupCart = () => {
+    dispatch({
+      type: OPEN__POPUP_CART,
+    });
+  };
   return (
     <div className="nav">
       <div className="openNav">{nav ? "X" : "OPEN"}</div>
       {nav && (
         <div className={`nav__content ${bgNav ? "navColor" : "navTranper"} `}>
           <div className="nav__content__logo">
-            <h2 className="brand">DTV</h2>
-            <p className="text">Develop shop</p>
+            <h2 className="brand">
+              <Link id="dtv" to="/">
+                DTV
+              </Link>
+            </h2>
+            <p className="text">
+              {" "}
+              <Link id="dtvshop" to="/">
+                Developer Shop
+              </Link>
+            </p>
           </div>
           <div className="nav__content__menu">
             <nav>
@@ -75,7 +100,12 @@ const Nav = () => {
             <div className="nav__content__right__socials">
               <FacebookIcon />
               <InstagramIcon />
-              <ShoppingBasketIcon />
+              <div onClick={openPopupCart}>
+                <span>
+                  <ShoppingBasketIcon />
+                  {basket.length > 0 && `(${basket.length})`}
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -84,4 +114,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default connect()(Nav);

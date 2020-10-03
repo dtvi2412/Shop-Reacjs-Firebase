@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 
 import "./App.css";
+
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Home from "./Pages/Home/Home";
 import Nav from "./Components/Nav/Nav";
-import Products from "./Components/Product/Products";
-import TextBackground from "./Components/TextBackground/TextBackground";
+import Cart from "./Pages/Cart/Cart";
 
 function App() {
   useEffect(() => {
@@ -23,17 +25,17 @@ function App() {
     });
   }, []);
   return (
-    <div className="App">
-      <div className="poiter"></div>
-      <div className="bgApp"></div>
-      {/* Navbar  */}
-      <Nav />
-      {/* Carousel text */}
-      <TextBackground />
-
-      {/* Product */}
-      <Products />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <div className="poiter"></div>
+        {/* Navbar  */}
+        <Nav />
+        <Switch>
+          <Route path="/cart" component={Cart} />
+          <Route exact={true} path="" component={Home} />{" "}
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 

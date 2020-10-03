@@ -1,0 +1,138 @@
+.popupCart {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  &__content {
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 350px;
+    height: 100%;
+
+    background-color: #fff;
+    animation: popupCartAni 0.3s linear 0s 1 alternate;
+    transition: all 0.5s;
+    &__header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      background-color: #111;
+      padding: 20px;
+      color: #fff;
+      text-align: center;
+      &__icon {
+        & > .MuiSvgIcon-root {
+          font-size: 1.2rem;
+        }
+      }
+      &__text {
+        font-size: 1.5rem;
+        font-weight: 300;
+      }
+    }
+    &__body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      &__col {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        // flex-wrap: wrap;
+        // width: 10px;
+        margin-top: 5px;
+
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        width: 85%;
+        padding: 30px 10px;
+
+        position: relative;
+        &__img {
+          width: 80px;
+          height: 80px;
+          object-fit: contain;
+        }
+        &__info {
+          &__name {
+            font-size: 1rem;
+            color: gray;
+            font-weight: 500;
+            margin-bottom: 5px;
+          }
+          &__price {
+            font-size: 0.9rem;
+            font-weight: bold;
+          }
+        }
+        &__close {
+          font-size: 0.8rem;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 300ms;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+        &:hover {
+          .popupCart__content__body__col__close {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
+      .noItem {
+        margin: 20px;
+        &__text {
+          font-size: 1.8rem;
+          font-weight: 700;
+          color: #111;
+        }
+        &__nofi {
+          margin-top: 10px;
+          color: rgba(0, 0, 0, 0.6);
+        }
+      }
+      &__viewCart {
+        width: 80%;
+        margin-top: 20px;
+        padding: 5px 10px;
+
+        background-color: rgba(0, 0, 0, 1);
+
+        transition: all 0.3s;
+        text-align: center;
+        a {
+          color: #fff;
+          font-size: 1.2rem;
+          text-decoration: none;
+        }
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+  }
+}
+@keyframes popupCartAni {
+  from {
+    transform: translateX(300px);
+  }
+  to {
+    transform: translateX(0px);
+  }
+}
