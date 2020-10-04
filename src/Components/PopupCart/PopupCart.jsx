@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PopupCart.scss";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import { useDispatch, useSelector } from "react-redux";
-import { CLOSE__POPUP_CART, DELETE_ITEM_CART } from "../../Redux/Types/type";
+import {
+  CLOSE__POPUP_CART,
+  DELETE_ITEM_CART,
+  DOWN_BASKET,
+  UP_BASKTET,
+} from "../../Redux/Types/type";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { getBasketTotal } from "../../controler";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
 const PopupCart = () => {
   const dispatch = useDispatch();
-
+  const basket = useSelector((item) => item.coursesReducer.basket);
   //CLOSE POPUP
   const closePopupCart = () => {
     let popUpcart = document.querySelector(".popupCart__content");
@@ -35,6 +43,27 @@ const PopupCart = () => {
       id: item.id,
     });
   };
+  // UP 1 ITEM BASKET
+  const handleUp = (id) => {
+    dispatch({
+      type: UP_BASKTET,
+      id: id,
+    });
+  };
+  //REMOVE 1 ITEM
+  const handleDown = (id) => {
+    dispatch({
+      type: DOWN_BASKET,
+      id,
+    });
+  };
+  //Handle Change Count Basket
+  // const [valueInput, setValueInput] = useState("");
+  // const handleChangeCount = (e) => {
+  //   let val = e.target.value;
+  //   setValueInput(val);
+  //   console.log(valueInput);
+  // };
   const renderBodyBasket = () => {
     if (getBasket?.length > 0) {
       return getBasket?.map((item) => {
@@ -50,12 +79,43 @@ const PopupCart = () => {
                 {item.name}
               </h1>
               <p className="popupCart__content__body__col__info__price">
-                {item.price.toLocaleString("vi-VN", {
+                {item?.price.toLocaleString("vi-VN", {
                   style: "currency",
                   currency: "VND",
                 })}
               </p>
+              {/* AMOUT */}
+              <div className="popupCart__content__body__col__info__upDown">
+                <div
+                  className="popupCart__content__body__col__info__upDown__up"
+                  onClick={() => {
+                    handleUp(item.id);
+                  }}
+                >
+                  <AddIcon />
+                </div>
+                <div className="popupCart__content__body__col__info__upDown__text">
+                  <input
+                    value={item.amount}
+
+                    // value={valueInput}
+                    // onChange={(e) => {
+                    //   handleChangeCount(e);
+                    // }}
+                  />
+                </div>
+
+                <div
+                  className="popupCart__content__body__col__info__upDown__down"
+                  onClick={() => {
+                    handleDown(item.id);
+                  }}
+                >
+                  <RemoveIcon />
+                </div>
+              </div>
             </div>
+
             <div
               className="popupCart__content__body__col__close"
               onClick={() => handleRemoveItemInCart(item)}
@@ -87,16 +147,31 @@ const PopupCart = () => {
           >
             <ArrowForwardIosIcon />
           </div>
-          <h1 className="popupCart__content__header__text">Cart</h1>
+          <h1 className="popupCart__content__header__text">
+            Cart {basket?.length > 0 && `(${basket?.length}  )`}
+          </h1>
         </div>
         <div className="popupCart__content__body">
           {renderBodyBasket()}
           {getBasket.length > 0 && (
-            <div className="popupCart__content__body__viewCart">
-              <Link to="/cart" onClick={closePopupCart}>
-                View Cart
-              </Link>
-            </div>
+            <>
+              <div className="popupCart__content__body__total">
+                <h1 className="popupCart__content__body__total__text">
+                  Subtotal
+                </h1>
+                <p className="popupCart__content__body__total__price">
+                  {getBasketTotal(basket).toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
+                </p>
+              </div>
+              <div className="popupCart__content__body__viewCart">
+                <Link to="/cart" onClick={closePopupCart}>
+                  View Cart
+                </Link>
+              </div>
+            </>
           )}
         </div>
       </div>

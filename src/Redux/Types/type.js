@@ -9,3 +9,5 @@ export const CLOSE__POPUP_CART = "CLOSE__POPUP_CART";
 
 export const ADD_BASKET = "ADD_BASKET";
 export const DELETE_ITEM_CART = "DELETE_ITEM_CART";
+export const UP_BASKTET = "UP_BASKTET";
+export const DOWN_BASKET = "DOWN_BASKET";

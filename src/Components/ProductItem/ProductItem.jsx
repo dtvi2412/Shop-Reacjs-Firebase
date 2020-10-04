@@ -22,7 +22,8 @@ const ProductItem = ({ item }) => {
   const handleAddBasket = () => {
     dispatch({
       type: ADD_BASKET,
-      data: item,
+      data: { ...item, amount: 1 },
+      oneMOreThan: false,
     });
     dispatch({
       type: OPEN__POPUP_CART,

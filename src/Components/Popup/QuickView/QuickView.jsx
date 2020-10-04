@@ -31,8 +31,10 @@ function QuickView() {
   const handleAddToCart = () => {
     dispatch({
       type: ADD_BASKET,
-      data: product,
+      data: { ...product, amount: parseInt(inputvalue) },
+      oneMOreThan: parseInt(inputvalue),
     });
+    setInputValue("");
     dispatch({
       type: CLOSE_POPUP_QUICK_VIEW,
     });

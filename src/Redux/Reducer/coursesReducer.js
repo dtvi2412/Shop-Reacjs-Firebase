@@ -7,6 +7,8 @@ import {
   CLOSE__POPUP_CART,
   ADD_BASKET,
   DELETE_ITEM_CART,
+  UP_BASKTET,
+  DOWN_BASKET,
 } from "../Types/type";
 
 let initailState = {
@@ -16,6 +18,12 @@ let initailState = {
   setPopupQuickView: false,
   setPopupCart: false,
 };
+// export const getBasketTotal = (basket) => {
+//   basket?.reduce((amount, item) => {
+//     return amount + item.price;
+//   }, 0);
+// };
+
 const productsReducer = (state = initailState, action) => {
   switch (action.type) {
     case PRODUCTS:
@@ -33,7 +41,31 @@ const productsReducer = (state = initailState, action) => {
     case CLOSE__POPUP_CART:
       return { ...state, setPopupCart: false };
     case ADD_BASKET:
-      return { ...state, basket: [...state.basket, action.data] };
+      let arr = [...state.basket];
+      const idex = arr.findIndex((item) => item.id === action.data.id);
+
+      if (idex >= 0) {
+        //If id === action.data.id => Amout ++
+        let newArr = arr.map((item) => {
+          if (item.id === action.data.id && !action.oneMOreThan) {
+            return { ...item, amount: item.amount + 1 };
+          } else if (item.id === action.data.id && action.oneMOreThan) {
+            return { ...item, amount: item.amount + action.oneMOreThan };
+          } else {
+            return { ...item };
+          }
+        });
+        //Set Basket Store = clone basket
+        state.basket = newArr;
+        return {
+          ...state,
+        };
+      }
+
+      return {
+        ...state,
+        basket: [...state.basket, action.data],
+      };
     case DELETE_ITEM_CART:
       let cloneBasket = [...state.basket];
       const index = cloneBasket.findIndex((item) => item.id === action.id);
@@ -46,6 +78,30 @@ const productsReducer = (state = initailState, action) => {
       }
       state.basket = cloneBasket;
       return { ...state };
+
+    case UP_BASKTET:
+      let arrBasket = [...state.basket];
+      const upOne = arrBasket.map((item) => {
+        if (item.id === action.id) {
+          return { ...item, amount: item.amount + 1 };
+        } else {
+          return { ...item };
+        }
+      });
+      state.basket = upOne;
+      return { ...state };
+
+    case DOWN_BASKET:
+      let dowBasket = [...state.basket];
+      const downOne = dowBasket.map((item) => {
+        if (item.id === action.id && item.amount > 1) {
+          return { ...item, amount: item.amount - 1 };
+        } else {
+          return { ...item };
+        }
+      });
+      // state.basket = downOne;
+      return { ...state, basket: [...downOne] };
     default:
       return { ...state };
   }
