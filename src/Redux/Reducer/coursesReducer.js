@@ -10,19 +10,18 @@ import {
   UP_BASKTET,
   DOWN_BASKET,
 } from "../Types/type";
+//GET BASKET LOCAL
+
+let basketLocal = JSON.parse(localStorage.getItem("BASKET_LOCAL"));
 
 let initailState = {
   products: [],
   product: "",
-  basket: [],
+  //Check basket if have get Basket local , if Null basket : []
+  basket: basketLocal === null ? [] : basketLocal,
   setPopupQuickView: false,
   setPopupCart: false,
 };
-// export const getBasketTotal = (basket) => {
-//   basket?.reduce((amount, item) => {
-//     return amount + item.price;
-//   }, 0);
-// };
 
 const productsReducer = (state = initailState, action) => {
   switch (action.type) {

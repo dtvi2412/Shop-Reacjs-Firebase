@@ -29,57 +29,59 @@ const TextBackground = () => {
   }, []);
   return (
     <div className="textBg">
-      <div className="textBg__content">
-        <div id="slider" className="textBg__content__left">
-          {/* item1 */}
-          <div className="textBg__content__left__item">
-            <h1 className="title">The Reasoning</h1>
-            <p className="descrition">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
-              amet quae saepe nam perspiciatis ratione quo modi ab, assumenda
-              illum.
-            </p>
-            <button className="btnLearn">Learn More</button>
+      <div>
+        <div className="textBg__content">
+          <div id="slider" className="textBg__content__left">
+            {/* item1 */}
+            <div className="textBg__content__left__item">
+              <h1 className="title">The Reasoning</h1>
+              <p className="descrition">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
+                amet quae saepe nam perspiciatis ratione quo modi ab, assumenda
+                illum.
+              </p>
+              <button className="btnLearn">Learn More</button>
+            </div>
+            {/* item2 */}
+            <div className="textBg__content__left__item">
+              <h1 className="title">The Hotel</h1>
+              <p className="descrition">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
+                amet quae saepe nam perspiciatis ratione quo modi ab, assumenda
+                illum.
+              </p>
+              <button className="btnLearn">Learn More</button>
+            </div>
+            {/* item3 */}
+            <div className="textBg__content__left__item">
+              <h1 className="title">The Animal</h1>
+              <p className="descrition">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
+                amet quae saepe nam perspiciatis ratione quo modi ab, assumenda
+                illum.
+              </p>
+              <button className="btnLearn">Learn More</button>
+            </div>
+            {/* item4 */}
+            <div className="textBg__content__left__item">
+              <h1 className="title">The Building</h1>
+              <p className="descrition">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
+                amet quae saepe nam perspiciatis ratione quo modi ab, assumenda
+                illum.
+              </p>
+              <button className="btnLearn">Learn More</button>
+            </div>
           </div>
-          {/* item2 */}
-          <div className="textBg__content__left__item">
-            <h1 className="title">The Hotel</h1>
-            <p className="descrition">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
-              amet quae saepe nam perspiciatis ratione quo modi ab, assumenda
-              illum.
-            </p>
-            <button className="btnLearn">Learn More</button>
-          </div>
-          {/* item3 */}
-          <div className="textBg__content__left__item">
-            <h1 className="title">The Animal</h1>
-            <p className="descrition">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
-              amet quae saepe nam perspiciatis ratione quo modi ab, assumenda
-              illum.
-            </p>
-            <button className="btnLearn">Learn More</button>
-          </div>
-          {/* item4 */}
-          <div className="textBg__content__left__item">
-            <h1 className="title">The Building</h1>
-            <p className="descrition">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
-              amet quae saepe nam perspiciatis ratione quo modi ab, assumenda
-              illum.
-            </p>
-            <button className="btnLearn">Learn More</button>
-          </div>
+          {/* <div className="textBg__content__right"></div> */}
         </div>
-        {/* <div className="textBg__content__right"></div> */}
-      </div>
-      <div className="controller">
-        <div id="line1"></div>
-        <div id="line2"></div>
-        <div id="line3"></div>
-        <div id="line4"></div>
-        <div id="active"></div>
+        <div className="controller">
+          <div id="line1"></div>
+          <div id="line2"></div>
+          <div id="line3"></div>
+          <div id="line4"></div>
+          <div id="active"></div>
+        </div>
       </div>
     </div>
   );

@@ -16,9 +16,9 @@
   top: 0;
   left: 0; */
   width: 100%;
-
+  min-width: 650px;
   height: 100vh;
-  /* object-fit: contain; */
+  object-fit: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -49,7 +49,24 @@
   animation: cursorAni3 0.5s forwards;
   border: 1px solid red;
 }
+.backToTop {
+  background: #ff5858;
+  width: 40px;
+  height: 40px;
 
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  transition: all 0.5s;
+}
+.backToTop > .MuiSvgIcon-root {
+  color: white;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 @keyframes cursorAni {
   from {
     transform: scale(1);
@@ -76,5 +93,10 @@
   100% {
     transform: scale(1);
     opacity: 0;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .bgApp {
+    height: 80vh;
   }
 }

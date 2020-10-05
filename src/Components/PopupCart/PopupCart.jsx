@@ -10,7 +10,7 @@ import {
 } from "../../Redux/Types/type";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { getBasketTotal } from "../../controler";
+import { countItemBasket, getBasketTotal } from "../../controler";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 const PopupCart = () => {
@@ -148,7 +148,7 @@ const PopupCart = () => {
             <ArrowForwardIosIcon />
           </div>
           <h1 className="popupCart__content__header__text">
-            Cart {basket?.length > 0 && `(${basket?.length}  )`}
+            Cart {basket?.length > 0 && `( ${countItemBasket(basket)}  )`}
           </h1>
         </div>
         <div className="popupCart__content__body">

@@ -8,6 +8,9 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import "./Nav.scss";
 import { OPEN__POPUP_CART } from "../../Redux/Types/type";
 import { Link } from "react-router-dom";
+import { countItemBasket } from "../../controler";
+import MenuOpenIcon from "@material-ui/icons/MenuOpen";
+import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
 const Nav = () => {
   const [nav, setNav] = useState(true);
   const [bgNav, setBgNav] = useState(false);
@@ -38,13 +41,14 @@ const Nav = () => {
       let devshop = document.getElementById("dtvshop");
       if (window.scrollY > 100) {
         setBgNav(true);
-        setNav(true);
-        dtv.setAttribute("style", "color:black");
-        devshop.setAttribute("style", "color:black");
+        // setNav(true);
+        // dtv.setAttribute("style", "color:black");
+        // devshop.setAttribute("style", "color:black");
       } else {
         setBgNav(false);
-        dtv.setAttribute("style", "color:#840d0d");
-        devshop.setAttribute("style", "color:#111");
+
+        // dtv.setAttribute("style", "color:#840d0d");
+        // devshop.setAttribute("style", "color:#111");
       }
     };
     window.addEventListener("scroll", handleScrool);
@@ -56,10 +60,19 @@ const Nav = () => {
       type: OPEN__POPUP_CART,
     });
   };
+  //Open Nav
+  const GoNavFullNow = () => {
+    setNav(true);
+  };
   return (
     <div className="nav">
-      <div className="openNav">{nav ? "X" : "OPEN"}</div>
-      {nav && (
+      <div className="openNav">
+        {nav ? <CancelPresentationIcon /> : <MenuOpenIcon />}
+      </div>
+      <div className="FullScreenNav" onClick={GoNavFullNow}>
+        {!nav && <MenuOpenIcon />}
+      </div>
+      {nav ? (
         <div className={`nav__content ${bgNav ? "navColor" : "navTranper"} `}>
           <div className="nav__content__logo">
             <h2 className="brand">
@@ -103,12 +116,15 @@ const Nav = () => {
               <div onClick={openPopupCart}>
                 <span>
                   <ShoppingBasketIcon />
-                  {basket.length > 0 && `(${basket.length})`}
+                  {/* {basket.length > 0 && `(${basket.length})`} */}
+                  {basket.length > 0 && `(${countItemBasket(basket)})`}
                 </span>
               </div>
             </div>
           </div>
         </div>
+      ) : (
+        ""
       )}
     </div>
   );

@@ -1,11 +1,13 @@
 .textBg {
     width: 100%;
+    // width: 1540px;
+    // position: relative;
     &__content {
         width: 600px;
         position: absolute;
-        top: 50%;
+        top: 70%;
         left: 10%;
-        transform: translateY(-50%);
+        transform: translateY(-70%);
         overflow: hidden;
         &__left {
             display: inline-flex;
@@ -13,31 +15,31 @@
             transition: transform 0.5s;
             &__item {
                 width: 600px;
-            }
-            .title {
-                color: #fff;
-                font-size: 3.5rem;
-                font-weight: bold;
-            }
-            .descrition {
-                font-size: 1.2rem;
-                font-weight: 300;
-                color: #fff;
-                margin: 20px 0;
-            }
-            .btnLearn {
-                padding: 15px 20px;
-                background-color: #fff;
-                color: #111;
-                font-size: 1.1rem;
-                border: none;
-                border-radius: 12px;
-                &:hover {
-                    cursor: pointer;
+                .title {
+                    color: #fff;
+                    font-size: 3.5rem;
+                    font-weight: bold;
                 }
-                &:focus {
-                    outline: none;
+                .descrition {
+                    font-size: 1.2rem;
+                    font-weight: 300;
+                    color: #fff;
+                    margin: 20px 0;
+                }
+                .btnLearn {
+                    padding: 15px 20px;
+                    background-color: #fff;
+                    color: #111;
+                    font-size: 1.1rem;
                     border: none;
+                    border-radius: 12px;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                    &:focus {
+                        outline: none;
+                        border: none;
+                    }
                 }
             }
         }
@@ -49,6 +51,7 @@
         position: absolute;
         top: 25%;
         right: 70px;
+
         transform: translateY(10%);
         #line1,
         #line2,
@@ -68,6 +71,110 @@
             top: 0;
             transform: translateX(-50%);
             transition: top 0.5s;
+        }
+    }
+}
+@media only screen and (max-width: 760px) {
+    .textBg {
+        &__content {
+            &__left {
+                &__item {
+                }
+            }
+        }
+        .controller {
+            height: 240px;
+            position: absolute;
+            top: 70%;
+            left: 28%;
+
+            // transform: translateY(-10%);
+            transform: rotate(270deg);
+            #line1,
+            #line2,
+            #line3,
+            #line4 {
+                height: 60px;
+                width: 10px;
+
+                transform: translateX(-50%);
+            }
+            #active {
+                height: 60px;
+                width: 5px;
+
+                position: absolute;
+                top: 0;
+                transform: translateX(-50%);
+            }
+        }
+    }
+}
+@media only screen and (max-width: 650px) {
+    .textBg {
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+
+        &__content {
+            width: 200px;
+            position: absolute;
+            top: 60%;
+            left: 8%;
+            transform: translateY(-60%);
+            &__left {
+                &__item {
+                    .title {
+                        margin-top: 20px;
+                        color: #fff;
+                        font-size: 1.8rem;
+                        font-weight: bold;
+                    }
+                    .descrition {
+                        font-size: 0.9rem;
+                        font-weight: 300;
+                        color: #fff;
+                        margin: 20px 0;
+                    }
+                    .btnLearn {
+                        padding: 7px 12px;
+
+                        font-size: 0.8rem;
+
+                        transition: all 0.5s;
+                        &:hover {
+                            background-color: rgba(0, 0, 0, 0.6);
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+        .controller {
+            height: 240px;
+            position: absolute;
+            top: 55%;
+            left: 28%;
+
+            // transform: translateY(-10%);
+            transform: rotate(270deg);
+            #line1,
+            #line2,
+            #line3,
+            #line4 {
+                height: 60px;
+                width: 10px;
+
+                transform: translateX(-50%);
+            }
+            #active {
+                height: 60px;
+                width: 5px;
+
+                position: absolute;
+                top: 0;
+                transform: translateX(-50%);
+            }
         }
     }
 }

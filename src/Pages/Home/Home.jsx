@@ -6,7 +6,7 @@ import TextBackground from "../../Components/TextBackground/TextBackground";
 import { connect, useSelector } from "react-redux";
 
 const Home = () => {
-  const popupCart = useSelector((open) => open.coursesReducer.setPopupCart);
+  // const popupCart = useSelector((open) => open.coursesReducer.setPopupCart);
   return (
     <div>
       <div className="bgApp"></div>
@@ -16,7 +16,7 @@ const Home = () => {
       {/* Product */}
       <Products />
       {/* Popup Cart if true visible*/}
-      {popupCart && <PopupCart />}
+      {/* {popupCart && <PopupCart />} */}
     </div>
   );
 };

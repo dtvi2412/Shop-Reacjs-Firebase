@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { getBasketTotal } from "../../controler";
 import {
   QUICK_VIEW,
   OPEN_POPUP_QUICK_VIEW,
@@ -19,12 +20,19 @@ const ProductItem = ({ item }) => {
       type: OPEN_POPUP_QUICK_VIEW,
     });
   };
+
+  //ADD BASKET
+  const basketLocal = useSelector((basket) => basket.coursesReducer.basket);
+  useEffect(() => {
+    localStorage.setItem("BASKET_LOCAL", JSON.stringify(basketLocal));
+  }, [basketLocal]);
   const handleAddBasket = () => {
     dispatch({
       type: ADD_BASKET,
       data: { ...item, amount: 1 },
       oneMOreThan: false,
     });
+
     dispatch({
       type: OPEN__POPUP_CART,
     });
