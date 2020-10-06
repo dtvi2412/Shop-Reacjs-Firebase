@@ -14,20 +14,22 @@ const Products = () => {
   );
   useEffect(() => {
     //Get data
-    let databaseInfb = dataFirebase.database().ref("databag/");
-    const getDB = () => {
-      databaseInfb.on("value", (notes) => {
+    const databaseInfb = dataFirebase.database().ref("databag/");
+    const getDB = async () => {
+      await databaseInfb.on("value", (notes) => {
         let arr = [];
         notes.forEach((element) => {
           const id = element.key;
           const name = element.val().name;
           const image = element.val().image;
           const price = element.val().price;
+          const description = element.val().description;
           arr.push({
             id,
             name,
             image,
             price,
+            description,
           });
         });
         //Up data in reducer

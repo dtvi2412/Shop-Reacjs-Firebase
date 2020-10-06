@@ -3,6 +3,7 @@ import "./PopupCart.scss";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  ADD_BASKET,
   CLOSE__POPUP_CART,
   DELETE_ITEM_CART,
   DOWN_BASKET,
@@ -57,12 +58,17 @@ const PopupCart = () => {
       id,
     });
   };
-  //Handle Change Count Basket
+  // Handle Change Count Basket
   // const [valueInput, setValueInput] = useState("");
-  // const handleChangeCount = (e) => {
+  // const handleChangeCount = (e, product) => {
   //   let val = e.target.value;
   //   setValueInput(val);
-  //   console.log(valueInput);
+
+  //   dispatch({
+  //     type: ADD_BASKET,
+  //     data: { ...product, amount: parseInt(valueInput) },
+  //     oneMOreThan: parseInt(valueInput),
+  //   });
   // };
   const renderBodyBasket = () => {
     if (getBasket?.length > 0) {
@@ -100,7 +106,7 @@ const PopupCart = () => {
 
                     // value={valueInput}
                     // onChange={(e) => {
-                    //   handleChangeCount(e);
+                    //   handleChangeCount(e, item);
                     // }}
                   />
                 </div>
@@ -167,7 +173,12 @@ const PopupCart = () => {
                 </p>
               </div>
               <div className="popupCart__content__body__viewCart">
-                <Link to="/cart" onClick={closePopupCart}>
+                <Link
+                  to={{
+                    pathname: `/cart`,
+                  }}
+                  onClick={closePopupCart}
+                >
                   View Cart
                 </Link>
               </div>
