@@ -9,6 +9,7 @@ import Cart from "./Pages/Cart/Cart";
 import EjectIcon from "@material-ui/icons/Eject";
 import { connect, useSelector } from "react-redux";
 import PopupCart from "./Components/PopupCart/PopupCart";
+import Footer from "./Components/Footer/Footer";
 function App() {
   const [backtoTop, setBackToTop] = useState(false);
   useEffect(() => {
@@ -59,6 +60,8 @@ function App() {
         )}
         {/* Popup Cart if true visible*/}
         {popupCart && <PopupCart />}
+
+        <Footer />
       </div>
     </BrowserRouter>
   );

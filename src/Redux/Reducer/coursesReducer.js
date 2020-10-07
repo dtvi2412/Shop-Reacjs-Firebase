@@ -9,6 +9,8 @@ import {
   DELETE_ITEM_CART,
   UP_BASKTET,
   DOWN_BASKET,
+  COUNTRY,
+  CHANGE_NAME_COUNTRY,
 } from "../Types/type";
 //GET BASKET LOCAL
 
@@ -17,10 +19,14 @@ let basketLocal = JSON.parse(localStorage.getItem("BASKET_LOCAL"));
 let initailState = {
   products: [],
   product: "",
+
+  country: [],
   //Check basket if have get Basket local , if Null basket : []
   basket: basketLocal === null ? [] : basketLocal,
   setPopupQuickView: false,
   setPopupCart: false,
+
+  nameShipping: "Hà Nội",
 };
 
 const productsReducer = (state = initailState, action) => {
@@ -101,6 +107,13 @@ const productsReducer = (state = initailState, action) => {
       });
       // state.basket = downOne;
       return { ...state, basket: [...downOne] };
+
+    case COUNTRY:
+      return { ...state, country: [...action.data] };
+
+    //Change name
+    case CHANGE_NAME_COUNTRY:
+      return { ...state, nameShipping: action.name };
     default:
       return { ...state };
   }

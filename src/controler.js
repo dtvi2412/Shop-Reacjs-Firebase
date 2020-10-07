@@ -11,3 +11,9 @@ export const countItemBasket = (basket) => {
     return itemAmount;
   }, 0);
 };
+export const getTotalBasket = (basket, moneyShip) => {
+  return basket?.reduce((amount, item) => {
+    let total = item.price * item.amount;
+    return total + amount + moneyShip;
+  }, 0);
+};

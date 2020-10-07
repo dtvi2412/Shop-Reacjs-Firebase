@@ -1,11 +1,11 @@
 .cart {
   //fade Hight Nav
   // margin-top: 160px;
-  width: 80%;
-  margin: 160px auto;
+  width: 68%;
+  margin: 200px auto;
   &__content {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: flex-start;
 
     &__left {
@@ -19,6 +19,8 @@
         border-top: 1px solid rgba(0, 0, 0, 0.1);
         margin-top: 20px;
         padding: 20px 0;
+
+        position: relative;
         & > img {
           width: 100px;
           height: 100px;
@@ -32,7 +34,7 @@
           flex-direction: column;
           justify-content: space-between;
           margin-left: 20px;
-
+          margin-right: 160px;
           &__text {
             font-size: 1.1rem;
             margin-bottom: 10px;
@@ -47,7 +49,7 @@
           justify-content: flex-start;
           align-items: center;
           border: 1px solid rgba(0, 0, 0, 0.56);
-          width: 5rem;
+          width: 5.5rem;
           overflow: hidden;
           padding: 3px 7px;
           &__input {
@@ -64,8 +66,35 @@
             }
           }
           .up {
+            & > .MuiSvgIcon-root {
+              font-size: 0.7rem;
+            }
           }
           .down {
+            & > .MuiSvgIcon-root {
+              font-size: 0.7rem;
+            }
+          }
+        }
+        &__priceItem {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          position: absolute;
+          right: 0;
+          top: 20px;
+          &__totalPrice {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-right: 15px;
+            margin-left: 10px;
+          }
+          &__close {
+            & > .MuiSvgIcon-root {
+              font-size: 1rem;
+              color: rgba(0, 0, 0, 0.4);
+            }
           }
         }
       }
@@ -73,6 +102,153 @@
     &__right {
       &__text {
         font-size: 1.5rem;
+      }
+      .total {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        &__top {
+          margin-top: 20px;
+          &__subtotal {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+
+            &__text {
+              font-size: 1.2rem;
+              font-weight: 600;
+            }
+            &__total {
+              font-size: 1.1rem;
+              font-weight: 500;
+            }
+          }
+          &__shipping {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            &__name {
+              &__text {
+                font-size: 1.2rem;
+                font-weight: 600;
+              }
+              &__country {
+                font-size: 1.2rem;
+              }
+            }
+            &__free {
+              &__text {
+                font-size: 1rem;
+                text-transform: uppercase;
+              }
+            }
+          }
+          &__total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            &__name {
+              font-size: 1.2rem;
+
+              font-weight: 600;
+            }
+          }
+          &__button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #111;
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 5px 0;
+            &:focus {
+              border: none;
+              outline: none;
+            }
+            &:hover {
+              cursor: pointer;
+            }
+            &__icon {
+              & > .MuiSvgIcon-root {
+                font-size: 1.2rem;
+              }
+            }
+            &__text {
+              font-size: 0.8rem;
+              margin: 0 5px;
+              font-weight: 500;
+              padding: 10px 0;
+              letter-spacing: 1.2px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1195px) {
+  .cart {
+    width: 85%;
+  }
+}
+@media only screen and (max-width: 950px) {
+  .cart {
+    width: 95%;
+    &__content {
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+}
+
+@media only screen and (max-width: 810px) {
+  .cart {
+    width: 100%;
+    margin: 160px 30px;
+    &__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      &__left {
+        margin-bottom: 100px;
+        width: 100%;
+        max-width: 1300px;
+        min-width: 500px;
+      }
+      &__right {
+        width: 100%;
+        max-width: 600px;
+        min-width: 500px;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 630px) {
+  .cart {
+    margin-left: 10px;
+    &__content {
+      &__left {
+      }
+      &__right {
+      }
+    }
+  }
+}
+@media only screen and (max-width: 520px) {
+  .cart {
+    &__content {
+      &__left {
+      }
+      &__right {
+        min-width: 400px;
       }
     }
   }

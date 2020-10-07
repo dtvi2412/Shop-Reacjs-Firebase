@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./PopupCart.scss";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import { useDispatch, useSelector } from "react-redux";
@@ -62,12 +62,23 @@ const PopupCart = () => {
   // const [valueInput, setValueInput] = useState("");
   // const handleChangeCount = (e, product) => {
   //   let val = e.target.value;
+
   //   setValueInput(val);
 
   //   dispatch({
   //     type: ADD_BASKET,
   //     data: { ...product, amount: parseInt(valueInput) },
   //     oneMOreThan: parseInt(valueInput),
+  //   });
+  // };
+
+  // const handle = (product) => {
+  //   let basketArr = [...basket];
+
+  //   return basketArr.map((item) => {
+  //     if (item.id === product.id) {
+  //       return <div>{item.amount}</div>;
+  //     }
   //   });
   // };
   const renderBodyBasket = () => {
@@ -103,14 +114,15 @@ const PopupCart = () => {
                 <div className="popupCart__content__body__col__info__upDown__text">
                   <input
                     value={item.amount}
-
+                    type="number"
+                    // id="inputAmount"
                     // value={valueInput}
                     // onChange={(e) => {
                     //   handleChangeCount(e, item);
                     // }}
                   />
                 </div>
-
+                {/* {handle(item)} */}
                 <div
                   className="popupCart__content__body__col__info__upDown__down"
                   onClick={() => {
@@ -172,16 +184,15 @@ const PopupCart = () => {
                   })}
                 </p>
               </div>
-              <div className="popupCart__content__body__viewCart">
-                <Link
-                  to={{
-                    pathname: `/cart`,
-                  }}
-                  onClick={closePopupCart}
-                >
-                  View Cart
-                </Link>
-              </div>
+              <Link
+                className="buttonCart"
+                to={{
+                  pathname: `/cart`,
+                }}
+                onClick={closePopupCart}
+              >
+                View Cart
+              </Link>
             </>
           )}
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./QuickView.scss";
 import { connect, useDispatch, useSelector } from "react-redux";
 import {
@@ -20,14 +20,24 @@ function QuickView() {
   const handleOnchange = (e) => {
     const values = e.target.value;
     setInputValue(values);
-    if (values < 1) {
+    if (values < 0) {
       //   alert("Bạn không được nhập dưới 0!");
       setInputValue(1);
     }
+
     if (values > 99) {
       setInputValue(99);
     }
   };
+  useEffect(() => {
+    let input = document.getElementById("inputChange");
+    input.addEventListener("mouseleave", (e) => {
+      let value = e.target.value;
+      if (value <= 0 || value === "") {
+        setInputValue(1);
+      }
+    });
+  }, []);
   const handleAddToCart = () => {
     dispatch({
       type: ADD_BASKET,
@@ -70,6 +80,7 @@ function QuickView() {
               {" "}
               <label>Quantity</label>
               <input
+                id="inputChange"
                 onChange={(e) => handleOnchange(e)}
                 type="number"
                 className="number"
