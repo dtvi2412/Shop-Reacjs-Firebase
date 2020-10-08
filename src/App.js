@@ -10,6 +10,7 @@ import EjectIcon from "@material-ui/icons/Eject";
 import { connect, useSelector } from "react-redux";
 import PopupCart from "./Components/PopupCart/PopupCart";
 import Footer from "./Components/Footer/Footer";
+import DetailProduct from "./Pages/Detail-Product/DetailProduct";
 function App() {
   const [backtoTop, setBackToTop] = useState(false);
   useEffect(() => {
@@ -50,7 +51,8 @@ function App() {
         {/* Navbar  */}
         <Nav />
         <Switch>
-          <Route path="/cart" component={Cart} />
+          <Route exact={false} path="/detail/:id" component={DetailProduct} />
+          <Route exact={false} path="/cart" component={Cart} />
           <Route exact={true} path="" component={Home} />{" "}
         </Switch>
         {backtoTop && (

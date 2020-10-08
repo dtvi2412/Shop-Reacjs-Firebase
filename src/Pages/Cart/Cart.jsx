@@ -14,6 +14,7 @@ import {
 import { getBasketTotal, getTotalBasket } from "../../controler";
 import Country from "../../Components/Popup/Country/Country";
 import dataFirebase from "../../connectFirebase";
+import { useHistory } from "react-router-dom";
 const Cart = () => {
   useEffect(() => {
     const dataBaseCoutryInFirebase = dataFirebase.database().ref("country");
@@ -213,22 +214,33 @@ const Cart = () => {
       </div>
     );
   };
+  const history = useHistory();
+  const handleReturnHome = () => {
+    return history.push("/");
+  };
   return (
     <>
-      {/* If country True Load  */}
-      {country && <Country closeCountry={handleCountry} />}
-      <div className="cart">
-        <div className="cart__content">
-          <div className="cart__content__left">
-            <h1 className="cart__content__left__text">My Cart</h1>
-            {handleLoadBasket()}
+      {/* Check Basket Have Item , If have Item return , else Return Home */}
+      {basket.length > 0 ? (
+        <>
+          {/* If country True Load  */}
+          {country && <Country closeCountry={handleCountry} />}
+          <div className="cart">
+            <div className="cart__content">
+              <div className="cart__content__left">
+                <h1 className="cart__content__left__text">My Cart</h1>
+                {handleLoadBasket()}
+              </div>
+              <div className="cart__content__right">
+                <h1 className="cart__content__right__text">Order Summary</h1>
+                {handleLoadSubtotal()}
+              </div>
+            </div>
           </div>
-          <div className="cart__content__right">
-            <h1 className="cart__content__right__text">Order Summary</h1>
-            {handleLoadSubtotal()}
-          </div>
-        </div>
-      </div>
+        </>
+      ) : (
+        <div className="">{handleReturnHome()}</div>
+      )}
     </>
   );
 };

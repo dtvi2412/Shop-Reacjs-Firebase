@@ -48,6 +48,11 @@
         flex-direction: column;
         justify-content: space-between;
         margin-left: 10px;
+        &__description {
+          color: rgba(0, 0, 0, 0.6);
+          font-size: 1rem;
+          margin: 10px 0;
+        }
         &__name {
           font-size: 1.4rem;
           font-weight: bold;
@@ -77,6 +82,16 @@
         &__quantity {
           display: flex;
           flex-direction: column;
+        }
+        .viewDetail {
+          text-decoration: none;
+          color: #111;
+          u {
+            font-size: 1rem;
+            &:hover {
+              color: rgba(0, 0, 0, 0.6);
+            }
+          }
         }
         &__add {
           width: 100%;

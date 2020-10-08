@@ -11,6 +11,8 @@ import {
   DOWN_BASKET,
   COUNTRY,
   CHANGE_NAME_COUNTRY,
+  ADD_PRODUCT_DETAIL,
+  DESTROY,
 } from "../Types/type";
 //GET BASKET LOCAL
 
@@ -19,8 +21,9 @@ let basketLocal = JSON.parse(localStorage.getItem("BASKET_LOCAL"));
 let initailState = {
   products: [],
   product: "",
-
+  detailProduct: [],
   country: [],
+  listImage: [],
   //Check basket if have get Basket local , if Null basket : []
   basket: basketLocal === null ? [] : basketLocal,
   setPopupQuickView: false,
@@ -114,6 +117,28 @@ const productsReducer = (state = initailState, action) => {
     //Change name
     case CHANGE_NAME_COUNTRY:
       return { ...state, nameShipping: action.name };
+
+    //ADD DETAIL PRODUCT
+    case ADD_PRODUCT_DETAIL:
+      return { ...state, detailProduct: action.data };
+
+    case "LIST_IMAGE":
+      return { ...state, listImage: action.data };
+
+    //Chage Image
+    case "CHANGE_IMAGE":
+      let arrImage = [...state.listImage];
+      arrImage = arrImage.map((item) => {
+        if (item.picture === action.id) {
+          return { ...item, check: true };
+        }
+        return { ...item, check: false };
+      });
+      state.listImage = arrImage;
+
+      return { ...state };
+    case DESTROY:
+      return { ...state, detailProduct: null };
     default:
       return { ...state };
   }

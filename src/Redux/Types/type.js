@@ -14,3 +14,6 @@ export const DOWN_BASKET = "DOWN_BASKET";
 
 export const COUNTRY = "COUNTRY";
 export const CHANGE_NAME_COUNTRY = "CHANGE_NAME_COUNTRY";
+
+export const ADD_PRODUCT_DETAIL = "ADD_PRODUCT_DETAIL";
+export const DESTROY = "DESTROY";

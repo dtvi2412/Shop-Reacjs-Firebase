@@ -6,6 +6,7 @@ import {
   CLOSE_POPUP_QUICK_VIEW,
   OPEN__POPUP_CART,
 } from "../../../Redux/Types/type";
+import { Link } from "react-router-dom";
 
 function QuickView() {
   const product = useSelector((product) => product.coursesReducer.product);
@@ -76,6 +77,12 @@ function QuickView() {
                 })}
               </p>
             </div>
+            <p className="quickView__content__items__right__description">
+              {" "}
+              {product.description.length > 100
+                ? `${product.description.substr(0, 100)}...`
+                : product.description}
+            </p>
             <div className="quickView__content__items__right__quantity">
               {" "}
               <label>Quantity</label>
@@ -97,6 +104,13 @@ function QuickView() {
             >
               Add to Cart
             </button>
+            <Link
+              to={`/detail/${product.id}`}
+              className="viewDetail"
+              onClick={handleClose}
+            >
+              <u>View more detail</u>
+            </Link>
           </div>
         </div>
       </div>
