@@ -40,18 +40,26 @@ function QuickView() {
     });
   }, []);
   const handleAddToCart = () => {
-    dispatch({
-      type: ADD_BASKET,
-      data: { ...product, amount: parseInt(inputvalue) },
-      oneMOreThan: parseInt(inputvalue),
-    });
-    setInputValue("");
-    dispatch({
-      type: CLOSE_POPUP_QUICK_VIEW,
-    });
-    dispatch({
-      type: OPEN__POPUP_CART,
-    });
+    if (inputvalue === "" || parseInt(inputvalue) === 0) {
+      let input = document.getElementById("inputChange");
+      input.classList.add("inputRun");
+      setTimeout(() => {
+        input.classList.remove("inputRun");
+      }, 300);
+    } else {
+      dispatch({
+        type: ADD_BASKET,
+        data: { ...product, amount: parseInt(inputvalue) },
+        oneMOreThan: parseInt(inputvalue),
+      });
+      setInputValue("");
+      dispatch({
+        type: CLOSE_POPUP_QUICK_VIEW,
+      });
+      dispatch({
+        type: OPEN__POPUP_CART,
+      });
+    }
   };
   return (
     <div className="quickView">
@@ -96,6 +104,13 @@ function QuickView() {
                 max="99"
                 value={inputvalue}
               />
+              {inputvalue === "" || parseInt(inputvalue) === 0 ? (
+                <div className="err">
+                  You need to enter a value greater than 0
+                </div>
+              ) : (
+                ""
+              )}
             </div>
 
             <button

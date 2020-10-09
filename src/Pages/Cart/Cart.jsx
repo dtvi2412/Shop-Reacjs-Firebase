@@ -107,7 +107,7 @@ const Cart = () => {
     let a = name.reduce((amount, item) => {
       return amount + item.price;
     }, 0);
-
+    // console.log(a);
     return a;
   };
   const handleLoadBasket = () => {
@@ -197,7 +197,7 @@ const Cart = () => {
                 style: "currency",
                 currency: "VND",
               })} */}
-              {getTotalBasket(basket, loadTotal() / 2).toLocaleString("vi-VN", {
+              {getTotalBasket(basket, loadTotal() / 1).toLocaleString("vi-VN", {
                 style: "currency",
                 currency: "VND",
               })}

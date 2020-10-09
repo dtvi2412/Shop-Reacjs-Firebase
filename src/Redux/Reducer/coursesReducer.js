@@ -21,7 +21,7 @@ let basketLocal = JSON.parse(localStorage.getItem("BASKET_LOCAL"));
 let initailState = {
   products: [],
   product: "",
-  detailProduct: [],
+  detailProduct: "",
   country: [],
   listImage: [],
   //Check basket if have get Basket local , if Null basket : []
@@ -65,6 +65,7 @@ const productsReducer = (state = initailState, action) => {
         });
         //Set Basket Store = clone basket
         state.basket = newArr;
+
         return {
           ...state,
         };
@@ -120,7 +121,8 @@ const productsReducer = (state = initailState, action) => {
 
     //ADD DETAIL PRODUCT
     case ADD_PRODUCT_DETAIL:
-      return { ...state, detailProduct: action.data };
+      state.detailProduct = action.data;
+      return { ...state };
 
     case "LIST_IMAGE":
       return { ...state, listImage: action.data };

@@ -1,34 +1,98 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./DetailProduct.scss";
 import dataFirebase from "../../connectFirebase";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { ADD_PRODUCT_DETAIL, DESTROY } from "../../Redux/Types/type";
+import {
+  ADD_BASKET,
+  ADD_PRODUCT_DETAIL,
+  DESTROY,
+  OPEN__POPUP_CART,
+} from "../../Redux/Types/type";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { Link } from "react-router-dom";
+import WaitingLoad from "../../Components/WaitingLoad/WaitingLoad";
 const DetailProduct = ({ match }) => {
+  //SET UP BASKET LOCAL
+  const basketLocal = useSelector((basket) => basket.coursesReducer.basket);
+  useEffect(() => {
+    localStorage.setItem("BASKET_LOCAL", JSON.stringify(basketLocal));
+  }, [basketLocal]);
   const dispatch = useDispatch();
+
   const detailProduct = useSelector(
     (detailPro) => detailPro.coursesReducer.detailProduct
   );
   const listImage = useSelector(
     (listImage) => listImage.coursesReducer.listImage
   );
+  const [inputvalue, setInputValue] = useState(1);
+
+  const handleOnchange = (e) => {
+    const values = e.target.value;
+    setInputValue(values);
+    let input = document.getElementById("inputChange");
+    input.addEventListener("mouseleave", (e) => {
+      let value = e.target.value;
+      if (value <= 0 || value === "") {
+        setInputValue(1);
+      }
+    });
+
+    if (values < 0) {
+      //   alert("Bạn không được nhập dưới 0!");
+      setInputValue(1);
+    }
+
+    if (values > 99) {
+      setInputValue(99);
+    }
+  };
+  const handleAddToCart = () => {
+    if (inputvalue === "" || parseInt(inputvalue) === 0) {
+      let input = document.getElementById("inputChange");
+      input.classList.add("inputRun");
+      setTimeout(() => {
+        input.classList.remove("inputRun");
+      }, 300);
+    } else {
+      dispatch({
+        type: ADD_BASKET,
+        data: { ...detailProduct, amount: parseInt(inputvalue) },
+        oneMOreThan: parseInt(inputvalue),
+      });
+
+      setInputValue("");
+
+      dispatch({
+        type: OPEN__POPUP_CART,
+      });
+      setInputValue(1);
+    }
+  };
+
   useEffect(() => {
     const getTableDetail = dataFirebase.database().ref("detail-product");
     const getListImageDB = dataFirebase.database().ref("list-image");
     const getdb = async () => {
       await getTableDetail.on("value", (notes) => {
         let arr = [];
+        let object = {};
         notes.forEach((element) => {
+          //   Check if id product === id PUSH ELSE NULL
+          const idParams = match.params.id;
           const id = element.key;
-          const picture = element.val().picture;
+          if (idParams === id) {
+            object.id = element.key;
+            object.name = element.val().name;
+            object.image = element.val().image;
+            object.price = element.val().price;
+            object.description = element.val().description;
+          }
 
-          //   const pit = Object.entries(picture);
-          //   console.log("pit", pit);
-
-          //   pit.forEach((item) => {
-          //     console.log(item);
-          //   });
+          // const id = element.key;
+          //GET IMAGE
+          const image = element.val().image;
+          console.log(image);
 
           const name = element.val().name;
 
@@ -41,16 +105,18 @@ const DetailProduct = ({ match }) => {
               id,
               name,
               price,
-              picture: picture,
+              image,
               //   picture: pit,
               description,
             });
           }
         });
+        console.log("object", object);
         // console.log(arr, match.params.id);
+        console.log(arr);
         dispatch({
           type: ADD_PRODUCT_DETAIL,
-          data: arr,
+          data: object,
         });
       });
     };
@@ -79,6 +145,9 @@ const DetailProduct = ({ match }) => {
         });
       });
     };
+
+    //Handle Input
+
     getdb();
     getListImage();
     return () =>
@@ -98,21 +167,26 @@ const DetailProduct = ({ match }) => {
 
   //   Render Detail PRODUCT
   const renderDetailProduct = () => {
-    return detailProduct?.map((item, index) => {
+    // return detailProduct?.map((item, index) => {
+
+    if (detailProduct === null || detailProduct === "") {
+      return <WaitingLoad />;
+    } else {
       return (
-        <Fragment key={index}>
+        <Fragment>
+          {" "}
+          {/* <WaitingLoad /> */}
           <div className="detailProduct__content__text">
             <h1 className="text">
-              <Link to="/">Home</Link> / <span>{item.name}</span>
+              <Link to="/">Home</Link> / <span>{detailProduct?.name}</span>
             </h1>
           </div>
-
           {/* ITEM */}
-          <div className="detail" key={index}>
+          <div className="detail">
             <div className="detail__left">
               {/* {item.picture.map((item) => {
-                return <img src={item.image} />;
-              })} */}
+                    return <img src={item.image} />;
+                  })} */}
               {/* <img src={item.picture} alt="Image detail" /> */}
               <div className="detail__left__listImage">
                 <div className="fullListImage">
@@ -139,27 +213,48 @@ const DetailProduct = ({ match }) => {
                 </div>
               </div>
 
-              <p className="description">{item.description}</p>
+              <p className="description">{detailProduct?.description}</p>
             </div>
             <div className="detail__right">
               <div>
                 {" "}
-                <h1 className="name">{item.name}</h1>
+                <h1 className="name">{detailProduct?.name}</h1>
                 <p className="right">
-                  {item.price.toLocaleString("vi-VN", {
+                  {parseInt(detailProduct?.price).toLocaleString("vi-VN", {
                     style: "currency",
                     currency: "VND",
                   })}
+                  {/* {detailProduct?.price.toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    })} */}
                 </p>
               </div>
 
               <div className="currency">
                 <label>Quantity</label>
-                <input className="amount" type="number" value="1" />
+                <input
+                  id="inputChange"
+                  className="amount"
+                  type="number"
+                  value={inputvalue}
+                  onChange={(e) => {
+                    handleOnchange(e);
+                  }}
+                />
+                {inputvalue === "" || parseInt(inputvalue) === 0 ? (
+                  <div className="err">
+                    You need to enter a value greater than 0
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
               <div className="button">
                 <div className="addToCart">
-                  <button>Add to Cart</button>
+                  <button id="addToCart" onClick={handleAddToCart}>
+                    Add to Cart
+                  </button>
                   <div className="icons">
                     {" "}
                     <FavoriteBorderIcon />
@@ -171,7 +266,9 @@ const DetailProduct = ({ match }) => {
           </div>
         </Fragment>
       );
-    });
+    }
+
+    // });
   };
   return (
     <div className="detailProduct">

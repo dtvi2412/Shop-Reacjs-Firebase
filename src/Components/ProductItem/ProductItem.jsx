@@ -22,6 +22,7 @@ const ProductItem = ({ item }) => {
   };
 
   //ADD BASKET
+  //SET UP BASKET
   const basketLocal = useSelector((basket) => basket.coursesReducer.basket);
   useEffect(() => {
     localStorage.setItem("BASKET_LOCAL", JSON.stringify(basketLocal));

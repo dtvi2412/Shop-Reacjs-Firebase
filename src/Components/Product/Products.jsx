@@ -5,6 +5,7 @@ import { PRODUCTS } from "../../Redux/Types/type";
 import ProductItem from "../ProductItem/ProductItem";
 import "./Products.scss";
 import QuickView from "../Popup/QuickView/QuickView";
+import WaitingLoad from "../WaitingLoad/WaitingLoad";
 
 const Products = () => {
   const dispatch = useDispatch();
